@@ -31,17 +31,37 @@ function App() {
 
   return (
     <div className="app-container">
-      <h1 className="title">AIRPLAIN</h1>
-
-      <SearchInput onSearch={handleSearch} />
-
-      {loading && (
-        <div className="glass-panel" style={{ padding: '1rem 2rem', borderRadius: '50px', color: 'var(--accent-primary)' }}>
-          Searching flights...
+      <header className="header">
+        <div className="logo">
+          <span className="logo-icon">✈</span>
+          AIRPLAIN
         </div>
-      )}
+        <div style={{ fontWeight: 600, color: 'var(--airline-blue)' }}>First Class Experience</div>
+      </header>
 
-      {!loading && flightData && <FlightCard data={flightData} />}
+      <main className="main-content">
+        <div className="hero-text">
+          <h1 className="title">Where to next?</h1>
+          <p className="subtitle">Discover your next destination with premium comfort.</p>
+        </div>
+
+        <SearchInput onSearch={handleSearch} />
+
+        {loading && (
+          <div style={{
+            padding: '1rem 2rem',
+            color: 'var(--airline-blue)',
+            fontWeight: '600',
+            background: 'white',
+            borderRadius: '50px',
+            boxShadow: 'var(--shadow-lg)'
+          }}>
+            Searching flights...
+          </div>
+        )}
+
+        {!loading && flightData && <FlightCard data={flightData} />}
+      </main>
     </div>
   );
 }

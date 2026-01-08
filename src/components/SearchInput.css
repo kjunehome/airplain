@@ -1,18 +1,22 @@
 .search-container {
     display: flex;
     align-items: center;
-    padding: 0.75rem;
+    padding: 0.5rem;
+    padding-left: 1.5rem;
     border-radius: 9999px;
-    /* Pill shape */
+    background: white;
     width: 100%;
-    max-width: 500px;
+    max-width: 550px;
     margin-bottom: 3rem;
-    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: var(--shadow-lg);
+    border: 1px solid transparent;
+    transition: all 0.2s ease;
 }
 
 .search-container:focus-within {
-    transform: scale(1.02);
-    box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.5), var(--shadow-lg);
+    transform: translateY(-2px);
+    border-color: var(--airline-accent);
+    box-shadow: 0 15px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.01);
 }
 
 .search-input {
@@ -23,23 +27,27 @@
     font-size: 1.1rem;
     padding: 0.5rem 1rem;
     outline: none;
+    font-weight: 500;
 }
 
 .search-input::placeholder {
-    color: var(--text-secondary);
+    color: #94a3b8;
+    font-weight: 400;
 }
 
 .search-button {
-    background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+    background: var(--airline-blue);
     border: none;
     color: white;
-    padding: 0.75rem 1.5rem;
+    padding: 1rem 2rem;
     border-radius: 9999px;
     font-weight: 600;
     font-size: 1rem;
-    transition: opacity 0.2s;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    letter-spacing: 0.02em;
 }
 
 .search-button:hover {
-    opacity: 0.9;
+    background-color: var(--airline-dark);
 }
