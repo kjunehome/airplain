@@ -40,6 +40,17 @@ const FlightDetailModal = ({ flight, onClose }) => {
                         <div className="info-item">
                             <span className="label">Aircraft</span>
                             <span className="value">Boeing 787-9</span>
+                            {/* Aircraft Image */}
+                            <img
+                                src="/src/assets/aircraft_787.png"
+                                alt="Boeing 787"
+                                style={{
+                                    width: '100%',
+                                    marginTop: '0.5rem',
+                                    borderRadius: '8px',
+                                    boxShadow: '0 2px 8px rgba(0,0,0,0.1)'
+                                }}
+                            />
                         </div>
                         <div className="info-item">
                             <span className="label">Class</span>
