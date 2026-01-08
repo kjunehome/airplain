@@ -1,7 +1,7 @@
 import React from 'react';
 import './SearchInput.css';
 
-const SearchInput = ({ onSearch }) => {
+const SearchInput = ({ onSearch, t }) => {
     const [destination, setDestination] = React.useState('');
     const [date, setDate] = React.useState('');
     const [seatClass, setSeatClass] = React.useState('economy');
@@ -15,14 +15,16 @@ const SearchInput = ({ onSearch }) => {
         }
     };
 
+    if (!t) return null; // Safe guard
+
     return (
         <form className="search-container" onSubmit={handleSubmit}>
             <div className="input-group">
-                <label>DESTINATION</label>
+                <label>{t.labelDest}</label>
                 <input
                     type="text"
                     className="search-input"
-                    placeholder="City (e.g. JFK)"
+                    placeholder={t.placeholderDest}
                     value={destination}
                     onChange={(e) => setDestination(e.target.value)}
                 />
@@ -31,7 +33,7 @@ const SearchInput = ({ onSearch }) => {
             <div className="divider"></div>
 
             <div className="input-group">
-                <label>DATE</label>
+                <label>{t.labelDate}</label>
                 <input
                     type="date"
                     className="search-input"
@@ -44,21 +46,21 @@ const SearchInput = ({ onSearch }) => {
             <div className="divider"></div>
 
             <div className="input-group">
-                <label>CLASS</label>
+                <label>{t.labelClass}</label>
                 <select
                     className="search-input"
                     value={seatClass}
                     onChange={(e) => setSeatClass(e.target.value)}
                 >
-                    <option value="all">All Classes</option>
-                    <option value="economy">Economy</option>
-                    <option value="prestige">Prestige</option>
-                    <option value="first">First Class</option>
+                    <option value="all">{t.optionAll}</option>
+                    <option value="economy">{t.optionEconomy}</option>
+                    <option value="prestige">{t.optionPrestige}</option>
+                    <option value="first">{t.optionFirst}</option>
                 </select>
             </div>
 
             <button type="submit" className="search-button">
-                Search
+                {t.btnSearch}
             </button>
         </form>
     );
