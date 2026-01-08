@@ -1,11 +1,12 @@
 import React from 'react';
 import './FlightCard.css';
 
-const FlightCard = ({ data, onSelect }) => {
-    if (!data) return null;
+const FlightCard = ({ data, onSelect, t }) => {
+    if (!data || !t) return null;
 
     return (
         <div className="flight-card">
+            {/* Main Ticket Section (Left) */}
             <div className="card-main">
                 <div className="flight-header">
                     <div className="airline-info">
@@ -31,7 +32,7 @@ const FlightCard = ({ data, onSelect }) => {
                 </div>
 
                 <div className="seat-badge-container">
-                    <span className="seats-left">{data.seatsAvailable} seats left</span>
+                    <span className="seats-left">{data.seatsAvailable} {t.seatsLeft}</span>
                 </div>
             </div>
 
@@ -42,13 +43,14 @@ const FlightCard = ({ data, onSelect }) => {
                 <div className="notch-bottom"></div>
             </div>
 
+            {/* Sidebar (Right - Price & Action) */}
             <div className="card-sidebar">
                 <div className="price-info">
-                    <span className="currency">KRW</span>
+                    <span className="currency">{t.currency}</span>
                     <span className="amount">{data.price.toLocaleString()}</span>
                 </div>
                 <button className="select-button" onClick={() => onSelect(data)}>
-                    Select
+                    {t.select}
                 </button>
             </div>
         </div>

@@ -1,48 +1,26 @@
 import React from 'react';
 import './FlightDetailModal.css';
+import aircraftImg from '../assets/aircraft_787.png';
 
-const FlightDetailModal = ({ flight, onClose }) => {
-    if (!flight) return null;
+const FlightDetailModal = ({ flight, onClose, t }) => {
+    if (!flight || !t) return null;
 
     return (
         <div className="modal-overlay" onClick={onClose}>
             <div className="modal-content" onClick={e => e.stopPropagation()}>
                 <div className="modal-header">
-                    <h2>Flight Details</h2>
-                    <span className="flight-number">{flight.airline} {flight.flightNumber}</span>
-                    <button className="close-button" onClick={onClose}>&times;</button>
+                    <h2>{flight.originCode} ✈ {flight.destCode}</h2>
+                    <span className="flight-detail-num">{flight.airline} {flight.flightNumber}</span>
                 </div>
 
                 <div className="modal-body">
-                    <div className="route-detail">
-                        <div className="city-block">
-                            <span className="time-large">{flight.departureTime}</span>
-                            <span className="code-large">{flight.originCode}</span>
-                            <span className="city-name">{flight.originCity}</span>
-                        </div>
-                        <div className="path-visual">
-                            <span className="duration">{flight.duration}</span>
-                            <div className="line-visual"></div>
-                            <span className="non-stop">Non-stop</span>
-                        </div>
-                        <div className="city-block">
-                            <span className="time-large">{flight.arrivalTime}</span>
-                            <span className="code-large">{flight.destCode}</span>
-                            <span className="city-name">{flight.destCity}</span>
-                        </div>
-                    </div>
-
-                    <div className="info-grid">
+                    <div className="detail-row">
                         <div className="info-item">
-                            <span className="label">Date</span>
-                            <span className="value">{flight.date}</span>
-                        </div>
-                        <div className="info-item">
-                            <span className="label">Aircraft</span>
+                            <span className="label">{t.modalAircraft}</span>
                             <span className="value">Boeing 787-9</span>
                             {/* Aircraft Image */}
                             <img
-                                src="/src/assets/aircraft_787.png"
+                                src={aircraftImg}
                                 alt="Boeing 787"
                                 style={{
                                     width: '100%',
@@ -53,24 +31,37 @@ const FlightDetailModal = ({ flight, onClose }) => {
                             />
                         </div>
                         <div className="info-item">
-                            <span className="label">Class</span>
+                            <span className="label">{t.modalClass}</span>
                             <span className="value" style={{ textTransform: 'capitalize' }}>{flight.seatClass}</span>
-                        </div>
-                        <div className="info-item">
-                            <span className="label">Gate</span>
-                            <span className="value">TBD</span>
                         </div>
                     </div>
 
-                    <div className="price-section">
-                        <div className="price-label">Total Price</div>
-                        <div className="price-value">{flight.price.toLocaleString()} KRW</div>
+                    <div className="detail-row">
+                        <div className="info-item">
+                            <span className="label">{t.modalTime}</span>
+                            <div className="time-display">
+                                <div className="time-point">
+                                    <span className="tp-time">{flight.departureTime}</span>
+                                    <span className="tp-city">{flight.originCity} ({flight.originCode})</span>
+                                </div>
+                                <div className="time-arrow">→</div>
+                                <div className="time-point">
+                                    <span className="tp-time">{flight.arrivalTime}</span>
+                                    <span className="tp-city">{flight.destCity} ({flight.destCode})</span>
+                                </div>
+                            </div>
+                            <div className="detail-duration">{flight.duration}</div>
+                        </div>
+                    </div>
+
+                    <div className="detail-total">
+                        <span className="label">{t.modalPrice}</span>
+                        <span className="total-amount">{t.currency} {flight.price.toLocaleString()}</span>
                     </div>
                 </div>
 
                 <div className="modal-footer">
-                    <button className="secondary-button" onClick={onClose}>Close</button>
-                    <button className="primary-button">Book Now</button>
+                    <button className="confirm-button" onClick={onClose}>{t.btnClose}</button>
                 </div>
             </div>
         </div>
