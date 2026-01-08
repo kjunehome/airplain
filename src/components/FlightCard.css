@@ -1,53 +1,54 @@
 .flight-card {
     width: 100%;
-    max-width: 650px;
+    max-width: 850px;
     background: white;
-    border-radius: 16px;
+    border-radius: 12px;
     box-shadow: var(--shadow-card);
-    overflow: hidden;
-    animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: transform 0.2s, box-shadow 0.2s;
     border: 1px solid #e2e8f0;
+    display: flex;
+    flex-direction: column;
 }
 
-@keyframes slideUp {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
+.flight-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
 
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+.flight-header {
+    padding: 1rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.airline-name {
+    font-weight: 700;
+    color: var(--airline-blue);
+    margin-right: 0.5rem;
+}
+
+.flight-num {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.seats-left {
+    font-size: 0.8rem;
+    color: #ef4444;
+    /* Alert color */
+    font-weight: 600;
+    background: #fef2f2;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
 }
 
 .route {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 2rem 3rem;
-    position: relative;
-    border-bottom: 2px dashed #e2e8f0;
-}
-
-.route::before,
-.route::after {
-    content: '';
-    position: absolute;
-    bottom: -10px;
-    width: 20px;
-    height: 20px;
-    background-color: var(--bg-primary);
-    /* Matches body bg */
-    border-radius: 50%;
-}
-
-.route::before {
-    left: -10px;
-}
-
-.route::after {
-    right: -10px;
+    padding: 1.5rem 2rem;
 }
 
 .city {
@@ -57,98 +58,92 @@
 }
 
 .code {
-    font-size: 3.5rem;
+    font-size: 2rem;
     font-weight: 800;
-    color: var(--airline-blue);
-    letter-spacing: 0.05em;
+    color: var(--text-primary);
     line-height: 1;
 }
 
-.name {
-    color: var(--text-secondary);
-    font-size: 0.9rem;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
+.time-small {
+    font-size: 1rem;
     font-weight: 600;
-    margin-top: 0.5rem;
+    color: var(--text-secondary);
+    margin-top: 0.25rem;
 }
 
 .flight-path {
     flex: 1;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    position: relative;
     margin: 0 2rem;
+    position: relative;
+}
+
+.duration-info {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.25rem;
 }
 
 .line {
-    height: 2px;
+    height: 1px;
     background: #cbd5e1;
     width: 100%;
-    position: absolute;
-    z-index: 0;
+    position: relative;
 }
 
 .plane-icon {
-    z-index: 1;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -10%);
+    /* Center on line */
     background: white;
-    color: var(--airline-accent);
-    font-size: 1.5rem;
     padding: 0 0.5rem;
-    transform: rotate(90deg);
+    color: var(--airline-accent);
+    font-size: 1.2rem;
 }
 
-.details {
+.card-footer {
     display: flex;
     justify-content: space-between;
-    padding: 2rem 3rem;
+    align-items: center;
+    padding: 1rem 1.5rem;
     background-color: #f8fafc;
+    border-top: 1px solid #e2e8f0;
 }
 
-.detail-item {
+.price-info {
     display: flex;
-    flex-direction: column;
+    align-items: baseline;
+    gap: 0.25rem;
 }
 
-.label {
+.currency {
+    font-size: 0.9rem;
     color: var(--text-secondary);
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    margin-bottom: 0.25rem;
+    font-weight: 500;
+}
+
+.amount {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--airline-blue);
+}
+
+.select-button {
+    background: white;
+    color: var(--airline-blue);
+    border: 1px solid var(--airline-blue);
+    padding: 0.5rem 1.5rem;
+    border-radius: 6px;
     font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
 }
 
-.time {
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: var(--text-primary);
-}
-
-.zone {
-    font-size: 0.8rem;
-    color: var(--text-secondary);
-    margin-left: 0.25rem;
-}
-
-.status {
-    padding: 0 3rem 2rem;
-    background-color: #f8fafc;
-    display: flex;
-    justify-content: flex-end;
-}
-
-.status-badge {
-    padding: 0.35rem 1rem;
-    border-radius: 4px;
-    font-size: 0.8rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-}
-
-.status-badge.on-time {
-    background: var(--airline-dark);
+.select-button:hover {
+    background: var(--airline-blue);
     color: white;
 }
