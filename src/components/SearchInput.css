@@ -1,0 +1,45 @@
+.search-container {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem;
+    border-radius: 9999px;
+    /* Pill shape */
+    width: 100%;
+    max-width: 500px;
+    margin-bottom: 3rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.search-container:focus-within {
+    transform: scale(1.02);
+    box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.5), var(--shadow-lg);
+}
+
+.search-input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: var(--text-primary);
+    font-size: 1.1rem;
+    padding: 0.5rem 1rem;
+    outline: none;
+}
+
+.search-input::placeholder {
+    color: var(--text-secondary);
+}
+
+.search-button {
+    background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+    border: none;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 9999px;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: opacity 0.2s;
+}
+
+.search-button:hover {
+    opacity: 0.9;
+}
