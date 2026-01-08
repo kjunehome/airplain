@@ -7,6 +7,18 @@ import FlightList from './components/FlightList';
 import FlightDetailModal from './components/FlightDetailModal';
 
 import koreanAirLogo from './assets/korean_air_logo.svg';
+import heroBg from './assets/hero_bg.png';
+import seoulImg from './assets/seoul.png';
+import newYorkImg from './assets/new_york.png';
+import aircraftImg from './assets/aircraft_787.png';
+
+// Map for destination images
+const destinationImages = {
+  'ICN': seoulImg,
+  'SEL': seoulImg,
+  'JFK': newYorkImg,
+  'NYC': newYorkImg
+};
 
 function App() {
   const [searchResults, setSearchResults] = useState([]);
@@ -21,6 +33,9 @@ function App() {
     // Simulate API call
     setTimeout(() => {
       const { destination, date, seatClass } = searchParams;
+      const destCode = destination.substring(0, 3).toUpperCase();
+
+      const destImage = destinationImages[destCode] || (destCode === 'JFK' ? newYorkImg : seoulImg);
 
       // Mock 3 flights for the day
       const mockFlights = [
@@ -31,7 +46,8 @@ function App() {
           originCity: 'SEOUL',
           originCode: 'ICN',
           destCity: destination.toUpperCase(),
-          destCode: destination.substring(0, 3).toUpperCase(),
+          destCode: destCode,
+          destImage: destImage,
           departureTime: '10:00',
           arrivalTime: '11:20', // Mock arrival
           duration: '13h 20m',
@@ -47,7 +63,8 @@ function App() {
           originCity: 'SEOUL',
           originCode: 'ICN',
           destCity: destination.toUpperCase(),
-          destCode: destination.substring(0, 3).toUpperCase(),
+          destCode: destCode,
+          destImage: destImage,
           departureTime: '14:30',
           arrivalTime: '15:50',
           duration: '13h 20m',
@@ -63,7 +80,8 @@ function App() {
           originCity: 'SEOUL',
           originCode: 'ICN',
           destCity: destination.toUpperCase(),
-          destCode: destination.substring(0, 3).toUpperCase(),
+          destCode: destCode,
+          destImage: destImage,
           departureTime: '20:00',
           arrivalTime: '21:30',
           duration: '13h 30m',
@@ -88,13 +106,30 @@ function App() {
         <div style={{ fontWeight: 600, color: 'var(--airline-blue)' }}>First Class Experience</div>
       </header>
 
-      <main className="main-content">
-        <div className="hero-text">
-          <h1 className="title">Where to next?</h1>
-          <p className="subtitle">Discover your next destination with premium comfort.</p>
+      {/* Hero Section with Background Image */}
+      <div className="hero-section" style={{
+        backgroundImage: `url(${heroBg})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        width: '100%',
+        height: '400px',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        color: 'white',
+        marginBottom: '-3rem'
+      }}>
+        <div className="hero-text" style={{ textAlign: 'center', textShadow: '0 2px 10px rgba(0,0,0,0.3)' }}>
+          <h1 className="title" style={{ color: 'white', marginBottom: '0.5rem' }}>Where to next?</h1>
+          <p className="subtitle" style={{ color: 'white', opacity: 0.9 }}>Discover your next destination with premium comfort.</p>
         </div>
+      </div>
 
-        <SearchInput onSearch={handleSearch} />
+      <main className="main-content" style={{ marginTop: '0' }}>
+        <div style={{ transform: 'translateY(-50%)' }}>
+          <SearchInput onSearch={handleSearch} />
+        </div>
 
         {loading && (
           <div style={{
@@ -103,7 +138,8 @@ function App() {
             fontWeight: '600',
             background: 'white',
             borderRadius: '50px',
-            boxShadow: 'var(--shadow-lg)'
+            boxShadow: 'var(--shadow-lg)',
+            marginTop: '2rem'
           }}>
             Searching flights...
           </div>
